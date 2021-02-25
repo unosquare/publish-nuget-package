@@ -1,0 +1,17 @@
+name: 'Publish Nuget Package'
+description: 'This action will publish a Nuget package'
+inputs:
+  access-token:
+    description: 'GitHub Registry Package Access Token'
+    required: true
+  path:
+    description: 'Path to nuget'
+    required: true
+    
+runs:
+  using: 'composite'
+  steps: 
+    - run: dotnet tool install --global gpr5 --version 0.1.258-gefb061a7d3
+      shell: bash
+    - run: gpr5 push --api-key {{ inputs.access-token }} {{ inputs.path }}
+      shell: bash
