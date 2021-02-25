@@ -13,6 +13,7 @@ runs:
   steps: 
     - run: dotnet tool install --global gpr5 --version 0.1.258-gefb061a7d3
       shell: bash
+    - run: cd {{ inputs.path }}
+      shell: bash
     - run: gpr5 push --api-key {{ inputs.access-token }} *.nupkg
-      working-directory: {{ inputs.path }}
       shell: bash
